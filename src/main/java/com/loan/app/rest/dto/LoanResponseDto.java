@@ -1,24 +1,16 @@
 package com.loan.app.rest.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class LoanResponseDto {
     private Long id;
-    private String ConsumerName;
-    private double amount;
-    public LoanResponseDto(Long id, String ConsumerName, double amount){
-        this.id = id;
-        this.ConsumerName = ConsumerName;
-        this.amount = amount;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getConsumerName() {
-        return ConsumerName;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
+    private String LoanTakenFrom;
+    private Double amount;
+    private Double profitRate;
+    private Integer durationInMonths;
 }

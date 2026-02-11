@@ -1,28 +1,19 @@
 package com.loan.app.rest.dto;
 
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
+@Data
 public class LoanRequestDto {
-@NotBlank
-private String ConsumerName;
-@Min(1000)
-private double amount;
+    @NotNull
+    @NotEmpty
+    private String LoanTakenFrom;
+    @Min(30000)
+    private Double amount;
+    private Double profitRate;
 
-    public String getConsumerName() {
-        return ConsumerName;
-    }
-
-    public void setConsumerName(String consumerName) {
-       this.ConsumerName = consumerName;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
+    @NotNull(message = "Duration in months is required.")
+    private Integer durationInMonths;
 }

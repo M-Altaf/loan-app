@@ -20,12 +20,13 @@ public class LoanServiceImpl implements LoanService {
 
 
     @Override
-    public LoanResponseDto addLoan(LoanRequestDto loanRequestDto){
+    public LoanResponseDto addLoan(LoanRequestDto request){
 
-        // Convert RequestDTO → Entity
         LoanEntity loan = new LoanEntity();
-        loan.setConsumerName(loanRequestDto.getConsumerName());
-        loan.setAmount(loanRequestDto.getAmount());
+        loan.setAmount(request.getAmount());
+        loan.setLoanTakenFrom(request.getLoanTakenFrom());
+        loan.setProfitRate(request.getProfitRate());
+        loan.setDurationInMonths(request.getDurationInMonths());
 
         // Save to database
         LoanEntity savedLoan = loanRepository.save(loan);
@@ -33,8 +34,10 @@ public class LoanServiceImpl implements LoanService {
         // Convert Entity → ResponseDTO
         return new LoanResponseDto(
                 savedLoan.getId(),
-                savedLoan.getConsumerName(),
-                savedLoan.getAmount()
+                savedLoan.getLoanTakenFrom(),
+                savedLoan.getAmount(),
+                savedLoan.getProfitRate(),
+                savedLoan.getDurationInMonths()
         );
     }
 
@@ -42,13 +45,16 @@ public class LoanServiceImpl implements LoanService {
     public List<LoanResponseDto> getAllLoans() {
 
         return loanRepository.findAll()
-                .stream()
-                .map(loan -> new LoanResponseDto(
-                        loan.getId(),
-                        loan.getConsumerName(),
-                        loan.getAmount()
-                ))
-                .toList();
+               .stream()
+               .map(loan -> new LoanResponseDto(
+                       loan.getId(),
+                       loan.getLoanTakenFrom(),
+                       loan.getAmount(),
+                       loan.getProfitRate(),
+                       loan.getDurationInMonths()
+        ))
+               .toList();
+
     }
 
     @Override
@@ -66,16 +72,20 @@ public class LoanServiceImpl implements LoanService {
                 .orElseThrow(() -> new RuntimeException("Loan not found with id: " + id));
 
         // Update fields
-        existingLoan.setConsumerName(loanRequestDto.getConsumerName());
+        existingLoan.setLoanTakenFrom(loanRequestDto.getLoanTakenFrom());
         existingLoan.setAmount(loanRequestDto.getAmount());
+        existingLoan.setDurationInMonths(loanRequestDto.getDurationInMonths());
+        existingLoan.setProfitRate(loanRequestDto.getProfitRate());
 
         LoanEntity updatedLoan = loanRepository.save(existingLoan);
 
         return new LoanResponseDto(
                 updatedLoan.getId(),
-                updatedLoan.getConsumerName(),
-                updatedLoan.getAmount()
-        );
+                updatedLoan.getLoanTakenFrom(),
+                updatedLoan.getAmount(),
+                updatedLoan.getProfitRate(),
+                updatedLoan.getDurationInMonths());
+
     }
 
 }

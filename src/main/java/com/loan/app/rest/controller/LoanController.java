@@ -4,10 +4,12 @@ import com.loan.app.rest.dto.LoanRequestDto;
 import com.loan.app.rest.dto.LoanResponseDto;
 import com.loan.app.service.impl.LoanServiceImpl;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/loan")
 public class LoanController {
@@ -27,18 +29,17 @@ public class LoanController {
     public List<LoanResponseDto> getAllLoans(){
         return loanService.getAllLoans();
     }
+
     @DeleteMapping("/delete")
     public String deleteLoan(Long id){
         loanService.deleteLoan(id);
         return "Loan deleted successfully!";
     }
+
     @PutMapping("/update")
-    public LoanResponseDto updateLoan(
-            Long id,
-            @RequestBody @Valid LoanRequestDto loanRequestDto){
+    public LoanResponseDto updateLoan(Long id, @RequestBody @Valid LoanRequestDto loanRequestDto){
         return loanService.updateLoan(id, loanRequestDto);
     }
-
 
 }
 
