@@ -1,4 +1,4 @@
-package com.loan.app.rest.dto;
+package com.loan.app.rest.dto.Loandto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

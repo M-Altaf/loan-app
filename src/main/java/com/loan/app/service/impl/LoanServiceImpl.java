@@ -2,8 +2,9 @@ package com.loan.app.service.impl;
 
 import com.loan.app.entity.LoanEntity;
 import com.loan.app.repository.LoanRepository;
-import com.loan.app.rest.dto.LoanRequestDto;
-import com.loan.app.rest.dto.LoanResponseDto;
+import com.loan.app.rest.dto.Loandto.LoanRequestDto;
+import com.loan.app.rest.dto.Loandto.LoanResponseDto;
+import com.loan.app.service.impl.Interface.LoanService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,13 +15,13 @@ public class LoanServiceImpl implements LoanService {
 
     private final LoanRepository loanRepository;
 
-    public LoanServiceImpl(LoanRepository loanRepository){
+public LoanServiceImpl(LoanRepository loanRepository){
         this.loanRepository = loanRepository;
     }
 
 
-    @Override
-    public LoanResponseDto addLoan(LoanRequestDto request){
+@Override
+public LoanResponseDto addLoan(LoanRequestDto request){
 
         LoanEntity loan = new LoanEntity();
         loan.setAmount(request.getAmount());
@@ -41,8 +42,8 @@ public class LoanServiceImpl implements LoanService {
         );
     }
 
-    @Override
-    public List<LoanResponseDto> getAllLoans() {
+@Override
+public List<LoanResponseDto> getAllLoans() {
 
         return loanRepository.findAll()
                .stream()
@@ -57,16 +58,16 @@ public class LoanServiceImpl implements LoanService {
 
     }
 
-    @Override
-    public void deleteLoan(Long id) {
+@Override
+public void deleteLoan(Long id) {
 
         LoanEntity loan = loanRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Loan not found with id: " + id));
 
         loanRepository.delete(loan);
     }
-    @Override
-    public LoanResponseDto updateLoan(Long id, LoanRequestDto loanRequestDto){
+@Override
+public LoanResponseDto updateLoan(Long id, LoanRequestDto loanRequestDto){
 
         LoanEntity existingLoan = loanRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Loan not found with id: " + id));

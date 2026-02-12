@@ -1,9 +1,13 @@
 package com.loan.app.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.validation.constraints.Min;
+import lombok.Data;
+@Data
+@Entity
 public class CustomerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,3 +19,5 @@ public class CustomerEntity {
     private String address;
     private Double monthlyIncome;
 }
+
+
