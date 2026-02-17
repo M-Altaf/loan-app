@@ -9,8 +9,11 @@ public interface LoanService {
      LoanResponseDto addLoan(LoanRequestDto loanRequestDto);
 
      List<LoanResponseDto> getAllLoans();
+     LoanResponseDto getLoanById(Long id);
 
 public void deleteLoan(Long id);
 
-     LoanResponseDto updateLoan(Long id, LoanRequestDto loanRequestDto);
+     LoanResponseDto updateLoan(Long id, LoanRequestDto updateDto);
+
+     LoanResponseDto patchLoan(Long id, LoanRequestDto dto);
 }

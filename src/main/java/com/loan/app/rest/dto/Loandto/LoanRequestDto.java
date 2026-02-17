@@ -4,13 +4,14 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
+@AllArgsConstructor
 @Data
 public class LoanRequestDto {
     @NotNull
     @NotEmpty
-    private String LoanTakenFrom;
+    private String loanTakenFrom;
     @Min(1000)
     @Max(80000)
     private Double amount;

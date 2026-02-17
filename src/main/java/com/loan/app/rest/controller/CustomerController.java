@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/customer/api")
+@RequestMapping("api/customers")
 public class CustomerController {
 
     private final CustomerServiceServiceImpl customerService;
@@ -17,13 +17,18 @@ public class CustomerController {
     public CustomerController(CustomerServiceServiceImpl customerService){
         this.customerService = customerService;
     }
-    @PostMapping("/create/api")
+    @PostMapping("/create")
     public CustomerResponseDto createCustomer(@RequestBody @Valid CustomerRequestDto customerRequestDto){
         return customerService.addCustomer(customerRequestDto);
 
     }
-    @GetMapping("/get/customer")
+    @GetMapping("/get")
 public List<CustomerResponseDto> getAllCustomer(){
         return customerService.getAllCustomer();
     }
+
+    //get by id
+    //delete by id
+    //put by id
+    //patch by id
 }

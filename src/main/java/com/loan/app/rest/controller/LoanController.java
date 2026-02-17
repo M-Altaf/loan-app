@@ -29,16 +29,28 @@ public LoanResponseDto createLoan(@RequestBody @Valid LoanRequestDto loanRequest
 public List<LoanResponseDto> getAllLoans(){
         return loanService.getAllLoans();
     }
+@GetMapping("/get/{id}")
+public LoanResponseDto getLoanById
+        (@PathVariable Long id){
+    return loanService.getLoanById(id);
+}
 
-@DeleteMapping("/delete")
-public String deleteLoan(Long id){
+@DeleteMapping("/delete/{id}")
+String deleteLoan(@PathVariable Long id){
         loanService.deleteLoan(id);
         return "Loan deleted successfully!";
     }
 
-@PutMapping("/update")
-public LoanResponseDto updateLoan(Long id, @RequestBody @Valid LoanRequestDto loanRequestDto){
-        return loanService.updateLoan(id, loanRequestDto);
+@PutMapping("/updata/{id}")
+public LoanResponseDto patchLoan(@PathVariable Long id, @RequestBody LoanRequestDto patchDto){
+    return loanService.patchLoan(id, patchDto);
+}
+
+
+
+@PatchMapping("/patch{id}")
+public LoanResponseDto updateLoan(@PathVariable Long id, @RequestBody LoanRequestDto updateDto){
+        return loanService.updateLoan(id, updateDto);
     }
 
 }

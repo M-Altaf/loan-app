@@ -1,9 +1,13 @@
 package com.loan.app.service.impl;
 
 import com.loan.app.entity.CustomerEntity;
+import com.loan.app.entity.LoanEntity;
 import com.loan.app.repository.CustomerRepository;
+import com.loan.app.repository.LoanRepository;
 import com.loan.app.rest.dto.Customerdto.CustomerRequestDto;
 import com.loan.app.rest.dto.Customerdto.CustomerResponseDto;
+import com.loan.app.rest.dto.Loandto.LoanRequestDto;
+import com.loan.app.rest.dto.Loandto.LoanResponseDto;
 import com.loan.app.service.impl.Interface.CustomerService;
 import org.hibernate.boot.internal.Abstract;
 import org.springframework.stereotype.Service;
@@ -14,11 +18,12 @@ import java.util.List;
 public class CustomerServiceServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final LoanRepository loanRepository;
 
 
-    public CustomerServiceServiceImpl(CustomerRepository customer){
+    public CustomerServiceServiceImpl(CustomerRepository customer, LoanRepository loanRepository){
         this.customerRepository = customer;
-
+        this.loanRepository = loanRepository;
     }
 public CustomerResponseDto addCustomer(CustomerRequestDto requestDto){
 
@@ -58,6 +63,29 @@ public CustomerResponseDto addCustomer(CustomerRequestDto requestDto){
 
                 ))
                 .toList();
+    }
+    @Override
+    public LoanResponseDto updateLoan(Long id, LoanRequestDto dto) {
+
+        LoanEntity existingLoan = loanRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Loan not found with id: " + id));
+
+        // PUT = overwrite all fields
+
+        existingLoan.setLoanTakenFrom(dto.getLoanTakenFrom());
+        existingLoan.setAmount(dto.getAmount());
+        existingLoan.setProfitRate(dto.getProfitRate());
+        existingLoan.setDurationInMonths(dto.getDurationInMonths());
+
+        LoanEntity updatedLoan = loanRepository.save(existingLoan);
+
+        return new LoanResponseDto(
+                updatedLoan.getId(),
+                updatedLoan.getLoanTakenFrom(),
+                updatedLoan.getAmount(),
+                updatedLoan.getProfitRate(),
+                updatedLoan.getDurationInMonths()
+        );
     }
 
 

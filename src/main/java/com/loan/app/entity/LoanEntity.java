@@ -12,7 +12,7 @@ public class LoanEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String LoanTakenFrom;
+    private String loanTakenFrom;
     private Double amount;
     private Double profitRate;
     private Integer durationInMonths;

@@ -1,15 +1,11 @@
-package com.loan.app.rest.dto.Loandto;
+package com.loan.app.rest.dto;
 
 
-import com.loan.app.entity.LoanEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class LoanResponseDto {
+@Data
+public class LoanPatchRequestDto {
     private Long id;
     private String loanTakenFrom;
     private Double amount;
