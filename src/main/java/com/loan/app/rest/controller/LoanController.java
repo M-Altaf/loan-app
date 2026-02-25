@@ -5,15 +5,18 @@ import com.loan.app.rest.dto.Loandto.LoanResponseDto;
 import com.loan.app.service.impl.LoanServiceImpl;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j
+
 @RestController
 @RequestMapping("/api/loan")
 public class LoanController {
 
+    private static final Logger log = LoggerFactory.getLogger(LoanController.class);
     private final LoanServiceImpl loanService;
 
 public LoanController(LoanServiceImpl loanService) {
@@ -22,13 +25,19 @@ public LoanController(LoanServiceImpl loanService) {
 
 @PostMapping("/create")
 public LoanResponseDto createLoan(@RequestBody @Valid LoanRequestDto loanRequestDto) {
-        return loanService.addLoan(loanRequestDto);
+    log.info("[createLoan request payload: {}", loanRequestDto);
+        var response = loanService.addLoan(loanRequestDto);
+        log.info("[createLoan response :{}",response);
+        return response;
     }
 
 @GetMapping("/get")
-public List<LoanResponseDto> getAllLoans(){
+public List<LoanResponseDto> getAllLoans() {
+
         return loanService.getAllLoans();
     }
+
+
 @GetMapping("/get/{id}")
 public LoanResponseDto getLoanById
         (@PathVariable Long id){

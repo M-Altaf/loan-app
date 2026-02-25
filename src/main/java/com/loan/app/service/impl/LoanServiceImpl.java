@@ -1,12 +1,14 @@
 package com.loan.app.service.impl;
 
-import com.loan.app.config.ResourceNotFoundException.ResourceNotFoundException;
+import com.loan.app.exception.ResourceNotFoundException.ResourceNotFoundException;
 import com.loan.app.entity.LoanEntity;
 import com.loan.app.repository.LoanRepository;
 import com.loan.app.rest.dto.Loandto.LoanRequestDto;
 import com.loan.app.rest.dto.Loandto.LoanResponseDto;
 import com.loan.app.service.impl.Interface.LoanService;
 import lombok.SneakyThrows;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 @Service
 public class LoanServiceImpl implements LoanService {
 
+    private static final Logger log = LoggerFactory.getLogger(LoanServiceImpl.class);
     private final LoanRepository loanRepository;
 
 public LoanServiceImpl(LoanRepository loanRepository){
@@ -24,7 +27,7 @@ public LoanServiceImpl(LoanRepository loanRepository){
 
 @Override
 public LoanResponseDto addLoan(LoanRequestDto request){
-
+        log.info("Adding loan payload: {}", request);
         LoanEntity loan = new LoanEntity();
         loan.setAmount(request.getAmount());
         loan.setLoanTakenFrom(request.getLoanTakenFrom());

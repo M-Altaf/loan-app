@@ -1,12 +1,12 @@
 #chanage server port to 9000
 spring:
   application:
-    name: loan-app
+    name: postgres
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/loan_db
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: admin
+    password: altaf
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -14,10 +14,37 @@ spring:
       ddl-auto: update
     show-sql: true
 
+# JWT Configuration (add this)
+jwt:
+  secret: ${JWT_SECRET:mySecretKey12345mySecretKey12345mySecretKey12345}  # Use environment variable in production
+  expiration: 86400000  # 24 hours in milliseconds
+
+# Logging configuration
+logging:
+  level:
+    org.springframework.security: DEBUG  # Helpful for debugging auth issues
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE  # Shows SQL parameters
+    com.loan.app: DEBUG
+
+# Server configuration
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+
+# Swagger/OpenAPI configuration
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
 
 
 
 # db username = postgres
-# db password = admin
+# db password = altaf
 # db port = 5432
 # db name = laon_db

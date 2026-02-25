@@ -9,19 +9,18 @@ import com.loan.app.rest.dto.Customerdto.CustomerResponseDto;
 import com.loan.app.rest.dto.Loandto.LoanRequestDto;
 import com.loan.app.rest.dto.Loandto.LoanResponseDto;
 import com.loan.app.service.impl.Interface.CustomerService;
-import org.hibernate.boot.internal.Abstract;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CustomerServiceServiceImpl implements CustomerService {
+public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
     private final LoanRepository loanRepository;
 
 
-    public CustomerServiceServiceImpl(CustomerRepository customer, LoanRepository loanRepository){
+    public CustomerServiceImpl(CustomerRepository customer, LoanRepository loanRepository){
         this.customerRepository = customer;
         this.loanRepository = loanRepository;
     }

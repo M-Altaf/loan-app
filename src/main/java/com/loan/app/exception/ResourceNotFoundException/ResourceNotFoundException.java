@@ -1,4 +1,4 @@
-package com.loan.app.config.ResourceNotFoundException;
+package com.loan.app.exception.ResourceNotFoundException;
 
 public class ResourceNotFoundException extends Throwable {
 

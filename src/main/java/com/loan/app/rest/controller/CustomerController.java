@@ -2,7 +2,7 @@ package com.loan.app.rest.controller;
 
 import com.loan.app.rest.dto.Customerdto.CustomerRequestDto;
 import com.loan.app.rest.dto.Customerdto.CustomerResponseDto;
-import com.loan.app.service.impl.CustomerServiceServiceImpl;
+import com.loan.app.service.impl.CustomerServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +12,9 @@ import java.util.List;
 @RequestMapping("api/customers")
 public class CustomerController {
 
-    private final CustomerServiceServiceImpl customerService;
+    private final CustomerServiceImpl customerService;
 
-    public CustomerController(CustomerServiceServiceImpl customerService){
+    public CustomerController(CustomerServiceImpl customerService){
         this.customerService = customerService;
     }
     @PostMapping("/create")
